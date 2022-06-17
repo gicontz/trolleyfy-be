@@ -1,0 +1,73 @@
+paths:
+  /ems/{emsId}:
+    patch:
+      tags:
+        - Cashier
+      summary: Updates data for an EMS entry.
+      description: |
+        This will update data for an EMS entry.
+      security:
+        - CookieAuth: []
+      parameters:
+        - in: path
+          name: emsId
+          description: The ID of the EMS entry to update.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The data needed to update the EMS entry.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ems
+              properties:
+                ems:
+                  description: The EMS object to update.
+                  type: object
+                  properties:
+                    project:
+                      description: The project that the EMS belongs to.
+                      type: string
+                    name:
+                      description: The name of the EMS.
+                      type: string
+                    ip:
+                      description: The IP address of the EMS.
+                      type: string
+                    type:
+                      description: The connection type of the EMS.
+                      type: string
+                      enum:
+                        - LSM
+                        - USM
+                      example: LSM
+                    username:
+                      description: The username used to connect to the EMS.
+                      type: string
+                    password:
+                      description: The password used to connect to the EMS.
+                      type: string
+      responses:
+        200:
+          description: EMS data successfully updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: EMS data successfully updated.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+        409:
+          $ref: '#/components/responses/ConflictError'
+        500:
+          $ref: '#/components/responses/InternalServerError'

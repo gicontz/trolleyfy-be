@@ -1,0 +1,110 @@
+paths:
+  /inventory/create:
+    post:
+      tags:
+        - Inventory
+      summary: Creates a new Item entry.
+      description: |
+        This will create a new Item entry.
+      security:
+        - CookieAuth: []
+      requestBody:
+        description: The data needed to create an Item entry.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Item name
+                  type: string
+                  required: true
+                productCode:
+                  description: Product Code identifier
+                  type: string
+                  required: true
+                price:
+                  description: Product Price/Pts
+                  type: number
+                  required: true
+                qty:
+                  description: Product Quantity/Availability
+                  type: number
+                  required: true
+                description:
+                  description: Item description
+                  type: string
+                category:
+                  description: The product category
+                  type: string
+                  enum:
+                    - canned-goods
+                    - frozen-food
+                    - essentials
+                    - apparel
+                    - meat
+                    - vegetable
+                    - fruit
+                    - electronics
+                    - hygiene
+                  example: apparel
+                  required: true
+
+      responses:
+        200:
+          description: Item data successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: Item data successfully created.
+                  data:
+                    description: The data associated with this response.
+                    type: object
+                    properties:
+                      itemId:
+                        description: Item id
+                        type: string
+                      name:
+                        description: Item name
+                        type: string
+                      productCode:
+                        description: Product Code identifier
+                        type: string
+                      price:
+                        description: Product Price/Pts
+                        type: number
+                      qty:
+                        description: Product Quantity/Availability
+                        type: number
+                        required: true
+                      description:
+                        description: Item description
+                        type: string
+                      category:
+                        description: The product category
+                        type: string
+                        enum:
+                          - canned-goods
+                          - frozen-food
+                          - essentials
+                          - apparel
+                          - meat
+                          - vegetable
+                          - fruit
+                          - electronics
+                          - hygiene
+                        example: apparel
+        400:
+          $ref: '#/components/responses/BadRequestError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        409:
+          $ref: '#/components/responses/ConflictError'
+        500:
+          $ref: '#/components/responses/InternalServerError'

@@ -1,0 +1,35 @@
+paths:
+  /ems/{emsId}:
+    delete:
+      tags:
+        - Cashier
+      summary: Deletes an EMS entry.
+      description: |
+        This will delete an EMS entry.
+      security:
+        - CookieAuth: []
+      parameters:
+        - in: path
+          name: emsId
+          description: The ID of the EMS entry to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: EMS data successfully deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: EMS data successfully deleted.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'

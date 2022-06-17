@@ -1,0 +1,79 @@
+paths:
+  /inventory/{itemId}:
+    patch:
+      tags:
+        - Inventory
+      summary: Updates data for an Item entry.
+      description: |
+        This will update data for an Item entry.
+      security:
+        - CookieAuth: []
+      parameters:
+        - in: path
+          name: itemId
+          description: The ID of the Item entry to update.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The data needed to update the Item entry.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:              
+                name:
+                  description: Item name
+                  type: string
+                  required: true
+                productCode:
+                  description: Product Code identifier
+                  type: string
+                  required: true
+                price:
+                  description: Product Price/Pts
+                  type: number
+                  required: true
+                qty:
+                  description: Product Quantity/Availability
+                  type: number
+                  required: true
+                description:
+                  description: Item description
+                  type: string
+                category:
+                  description: The product category
+                  type: string
+                  enum:
+                    - canned-goods
+                    - frozen-food
+                    - essentials
+                    - apparel
+                    - meat
+                    - vegetable
+                    - fruit
+                    - electronics
+                    - hygiene
+                  example: apparel
+                  required: true
+      responses:
+        200:
+          description: Item data successfully updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: Item data successfully updated.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+        409:
+          $ref: '#/components/responses/ConflictError'
+        500:
+          $ref: '#/components/responses/InternalServerError'

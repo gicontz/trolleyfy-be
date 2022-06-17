@@ -1,0 +1,78 @@
+paths:
+  /ems:
+    get:
+      tags:
+        - Cashier
+      summary: Retrieves a list of EMS entries.
+      description: |
+        This will retrieve a list of EMS entries.
+      parameters:
+        - in: query
+          name: project
+          description: The project that the EMS belongs to.
+          schema:
+            type: string
+        - in: query
+          name: name
+          description: The name of the EMS.
+          schema:
+            type: string
+        - in: query
+          name: ip
+          description: The IP address of the EMS.
+          schema:
+            type: string
+      responses:
+        200:
+          description: EMS data list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: EMS data list successfully retrieved.
+                  data:
+                    description: The data associated with this response.
+                    type: object
+                    properties:
+                      emsList:
+                        description: The EMS entry list that was retrieved.
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            project:
+                              description: The project that the EMS belongs to.
+                              type: string
+                            name:
+                              description: The name of the EMS.
+                              type: string
+                            ip:
+                              description: The IP address of the EMS.
+                              type: string
+                            type:
+                              description: The connection type of the EMS.
+                              type: string
+                              enum:
+                                - LSM
+                                - USM
+                              example: LSM
+                            username:
+                              description: The username used to connect to the EMS.
+                              type: string
+                            password:
+                              description: The password used to connect to the EMS.
+                              type: string
+                            createdAt:
+                              description: The timestamp of when this EMS object has been created.
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              description: The timestamp of when this EMS object has been updated.
+                              type: string
+                              format: date-time
+        500:
+          $ref: '#/components/responses/InternalServerError'

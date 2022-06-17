@@ -1,0 +1,35 @@
+paths:
+  /inventory/{itemId}:
+    delete:
+      tags:
+        - Inventory
+      summary: Deletes an Item entry.
+      description: |
+        This will delete an Item entry.
+      security:
+        - CookieAuth: []
+      parameters:
+        - in: path
+          name: itemId
+          description: The ID of the Item entry to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Item data successfully deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: Item data successfully deleted.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'

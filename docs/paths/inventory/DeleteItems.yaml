@@ -1,0 +1,40 @@
+paths:
+  /inventory/delete/multiple:
+    post:
+      tags:
+        - Inventory
+      summary: Deletes multiple Items.
+      description: |
+        This will delete multiple Item.
+      security:
+        - CookieAuth: []
+      requestBody:
+        description: The data needed to create an Item entry.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemIds:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        200:
+          description: Items successfully deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: Items successfully deleted.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'

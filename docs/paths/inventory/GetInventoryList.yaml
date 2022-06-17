@@ -1,0 +1,88 @@
+paths:
+  /inventory:
+    get:
+      tags:
+        - Inventory
+      summary: Retrieves a list of Item entries.
+      description: |
+        This will retrieve a list of Item entries.
+      parameters:
+        - in: query
+          name: category
+          description: The product category
+          schema:
+            type: string
+            enum:
+              - canned-goods
+              - frozen-food
+              - essentials
+              - apparel
+              - meat
+              - vegetable
+              - fruit
+              - electronics
+              - hygiene
+            example: apparel
+        - in: query
+          name: priceStart
+          description: Minimum price
+          schema:
+            type: string
+        - in: query
+          name: priceEnd
+          description: Maximum price
+          schema:
+            type: string
+      responses:
+        200:
+          description: Item data list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    description: The message associated with this response.
+                    type: string
+                    example: Item data list successfully retrieved.
+                  records:
+                    description: The data associated with this response.
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        itemId:
+                          description: Item id
+                          type: string
+                        name:
+                          description: Item name
+                          type: string
+                        productCode:
+                          description: Product Code identifier
+                          type: string
+                        price:
+                          description: Product Price/Pts
+                          type: number
+                        qty:
+                          description: Product Quantity/Availability
+                          type: number
+                          required: true
+                        description:
+                          description: Item description
+                          type: string
+                        category:
+                          description: The product category
+                          type: string
+                          enum:
+                            - canned-goods
+                            - frozen-food
+                            - essentials
+                            - apparel
+                            - meat
+                            - vegetable
+                            - fruit
+                            - electronics
+                            - hygiene
+                          example: apparel
+        500:
+          $ref: '#/components/responses/InternalServerError'
