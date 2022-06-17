@@ -1,1 +1,1 @@
-yarn start-production
+npm run start-production
