@@ -5,10 +5,12 @@ import config from '@config/Config';
 class Database {
   public uri: string;
 
-  constructor() {
+  constructor(uri: string | undefined) {
     const { HOST, PORT, NAME, USERNAME, PASSWORD } = config.db;
     if (USERNAME != null && PASSWORD != null) {
       this.uri = `mongodb://${USERNAME}:${PASSWORD}@${HOST}:${PORT}/${NAME}`;
+    } else if (uri) {
+      this.uri = uri;
     } else {
       this.uri = `mongodb://${HOST}:${PORT}/${NAME}`;
     }
@@ -67,4 +69,4 @@ class Database {
   }
 }
 
-export default new Database();
+export default new Database(process.env.DB_URL);
