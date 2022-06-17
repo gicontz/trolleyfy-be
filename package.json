@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "yarn": "yarn",
-    "start": "nodemon -L ./src/Server.ts",
     "start-production": "node -r ./tsconfig-paths-bootstrap.js ./build/Server.js",
+    "start": "nodemon -L ./src/Server.ts",
     "build": "rimraf build && tsc",
     "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx --max-warnings=0 --color .",
     "lint-fix": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx --max-warnings=0 --color --fix .",
