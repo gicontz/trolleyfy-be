@@ -7,7 +7,9 @@ export type TItemCategory =
   | 'vegetable'
   | 'fruit'
   | 'electronics'
-  | 'hygiene';
+  | 'hygiene'
+  | 'drinks'
+  | 'food';
 
 export const ITEM_CATEGORIES: TItemCategory[] = [
   'apparel',
@@ -19,6 +21,8 @@ export const ITEM_CATEGORIES: TItemCategory[] = [
   'meat',
   'vegetable',
   'frozen-food',
+  'drinks',
+  'food',
 ];
 
 export interface IItem {

@@ -48,6 +48,8 @@ paths:
                     - fruit
                     - electronics
                     - hygiene
+                    - drinks
+                    - food
                   example: apparel
                   required: true
 
@@ -99,6 +101,8 @@ paths:
                           - fruit
                           - electronics
                           - hygiene
+                          - drinks
+                          - food
                         example: apparel
         400:
           $ref: '#/components/responses/BadRequestError'

@@ -8,7 +8,7 @@ class Database {
   constructor(uri: string | undefined) {
     const { HOST, PORT, NAME, USERNAME, PASSWORD } = config.db;
     if (USERNAME != null && PASSWORD != null) {
-      this.uri = `mongodb://${USERNAME}:${PASSWORD}@${HOST}:${PORT}/${NAME}`;
+      this.uri = `mongodb+srv://${USERNAME}:${PASSWORD}@${HOST}/${NAME}`;
     } else if (uri) {
       this.uri = uri;
     } else {

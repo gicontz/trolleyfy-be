@@ -32,16 +32,17 @@ const app = new App({
     cookieParser(config.auth.COOKIE_SECRET),
     cors({
       origin: (origin, callback) => {
-        const org = origin || 'invalid';
-        // undefined origin means from this API's domain
-        if (whiteList.indexOf(org) !== -1 || !origin) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by Cors'));
-        }
+        callback(null, true);
+        // const org = origin || 'invalid';
+        // // undefined origin means from this API's domain
+        // if (whiteList.indexOf(org) !== -1 || !origin) {
+        //   callback(null, true);
+        // } else {
+        //   callback(new Error('Not allowed by Cors'));
+        // }
       },
-      methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-      credentials: true,
+      methods: ['GET', 'OPTIONS', 'POST', 'PATCH', 'DELETE'],
+      credentials: false, // true for https
     }),
   ],
   routers: [
